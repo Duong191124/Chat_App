@@ -13,7 +13,15 @@ const login = async (req, res) => {
   try {
     const user = await authService.login(req.body);
     const token = authService.generateToken(user);
-    res.json({ token });
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        displayName: user.displayName,
+      },
+    });
   } catch (err) {
     res.status(400).json({ msg: err.message });
   }

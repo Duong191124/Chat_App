@@ -5,6 +5,7 @@ const sequelize = require("./config/database.js");
 const initSocket = require("./config/socket.js");
 const session = require("express-session");
 const authRoutes = require("./routes/auth.route.js");
+const userRoutes = require("./routes/user.route.js");
 const { Server } = require("socket.io");
 
 const app = express();
@@ -22,7 +23,8 @@ app.use(
   })
 );
 
-app.use("/api/auth", authRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/user", userRoutes);
 
 // Initialize WebSocket events
 initSocket(io);
